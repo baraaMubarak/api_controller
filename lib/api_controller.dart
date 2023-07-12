@@ -14,7 +14,7 @@ class ApiController {
 
   Map<String, dynamic> cacheData = {};
 
-  Future<Map> get(Uri url, {Map<String, String>? headers, required BuildContext context, int numberOfSecondsToSave = 0, bool withoutToast = false}) async {
+  Future<Map> get(Uri url, {Map<String, String>? headers, int numberOfSecondsToSave = 0, bool withoutToast = false}) async {
     if (cacheData.keys.contains(url.toString())) {
       if (timeIsNotExpires(url)) {
         return cacheData[url.toString()];
@@ -45,7 +45,6 @@ class ApiController {
     Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
-    required BuildContext context,
   }) async {
     http.Response response = await http.post(url, headers: headers ?? {"Content-Type": "application/json"}, body: body, encoding: encoding);
     Map<String, dynamic> data = await jsonDecode(response.body);
@@ -61,7 +60,6 @@ class ApiController {
     Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
-    required BuildContext context,
   }) async {
     http.Response response = await http.patch(url, headers: headers ?? {"Content-Type": "application/json"}, body: body, encoding: encoding);
     Map<String, dynamic> data = await jsonDecode(response.body);
@@ -77,7 +75,6 @@ class ApiController {
     Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
-    required BuildContext context,
   }) async {
     http.Response response = await http.delete(url, headers: headers ?? {"Content-Type": "application/json"}, body: body, encoding: encoding);
     Map<String, dynamic> data = await jsonDecode(response.body);
